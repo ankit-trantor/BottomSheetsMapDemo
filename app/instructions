@@ -1,0 +1,16 @@
+1. create a new project.
+    Name=BottomSheetsMapDemo
+    Namespace = com.demo
+
+    Empty Activity
+
+2.  Create a map activity
+    File -> New -> Google -> Google Maps Activity
+    Use the defaults
+    You need a key - easiest way is to follow the instructions in the
+    Open "google_maps_api.xml"
+    Easiest way to get a key is to follow the instructions that are commented out in the xml file.
+    For my instructions - I copy the hyperlink that starts with "https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r"
+    Paste the whole hyperlink into a browser, follow the instructions.  After following the instructions in the browser, go back to the "google_maps_api.xml" file.  Copy the Android key that you just created in the browser and paste it as the new value for name="google_maps_key" in the file "google_maps_api.xml".
+
+3.
