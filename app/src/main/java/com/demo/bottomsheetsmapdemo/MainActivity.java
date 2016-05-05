@@ -1,5 +1,6 @@
 package com.demo.bottomsheetsmapdemo;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -16,6 +17,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     boolean showFAB = true;
     boolean firstSlide = true;
     private BottomSheetBehavior mBottomSheetBehavior;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.map_coordinator);
         setupBottomSheet(coordinatorLayout);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
 
 
     @Override
@@ -75,11 +87,43 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onStart() {
         super.onStart();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.demo.bottomsheetsmapdemo/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.demo.bottomsheetsmapdemo/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.disconnect();
     }
 
     // Needed for map
@@ -94,9 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-
-
-    private void setupBottomSheet(CoordinatorLayout coordinatorLayout){
+    private void setupBottomSheet(CoordinatorLayout coordinatorLayout) {
 
         final Animation growAnimation = AnimationUtils.loadAnimation(this, R.anim.simple_grow);
         final Animation shrinkAnimation = AnimationUtils.loadAnimation(this, R.anim.simple_shrink);
@@ -126,21 +168,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         NestedScrollView bottomSheetParent = (NestedScrollView) findViewById(R.id.parent_bottom_sheet);
 
 
-
-        FrameLayout bottomsheetframe = (FrameLayout)bottomSheetParent.findViewById(R.id.bottomsheetframe);
+        FrameLayout bottomsheetframe = (FrameLayout) bottomSheetParent.findViewById(R.id.bottomsheetframe);
         bottomsheetframe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mBottomSheetBehavior!= null){
-                    if(mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED &&
-                            mBottomSheetBehavior.getPeekHeight() == 1500){
+                if (mBottomSheetBehavior != null) {
+                    if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED &&
+                            mBottomSheetBehavior.getPeekHeight() == 1500) {
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                         fab.startAnimation(shrinkAnimation);
-                    }else if(mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED &&
-                            mBottomSheetBehavior.getPeekHeight() == 300){
+                    } else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED &&
+                            mBottomSheetBehavior.getPeekHeight() == 300) {
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                         fab.startAnimation(shrinkAnimation);
-                    }else if(firstSlide){
+                    } else if (firstSlide) {
                         firstSlide = false;
                         mBottomSheetBehavior.setPeekHeight(1500);
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -188,9 +229,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         if (mBottomSheetBehavior.getPeekHeight() == 1500) {
                             mBottomSheetBehavior.setPeekHeight(300);
-                        } else if(mBottomSheetBehavior.getPeekHeight() == 300) {
+                        } else if (mBottomSheetBehavior.getPeekHeight() == 300) {
                             mBottomSheetBehavior.setPeekHeight(1500);
-                        } else if(firstSlide){
+                        } else if (firstSlide) {
                             firstSlide = false;
                             mBottomSheetBehavior.setPeekHeight(300);
                         }

@@ -22,9 +22,22 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    // cause maps
     compile 'com.google.android.gms:play-services:8.4.0'
+
+    // appcompat/design libs
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
+
+    // app indexing
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+
+    // spring
+//    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+//    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
+
 }
